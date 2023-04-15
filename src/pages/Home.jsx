@@ -10,15 +10,15 @@ const Home = () => {
             <img src="/logo.png" alt="logo" className="w-26 h-30 shadow-lg rounded-lg" />
           </div>
           <div className="p-4 flex flex-col justify-center">
-            <div className="text-center">
+            <div className="text-left">
               <h1 className="text-5xl font-bold text-amber-700">SplitIt</h1>
               <h2 className="text-lg font-medium text-black">Simplify your group expenses!</h2>
             </div>
-          <Oauth />
-          </div>
+            <Oauth />
           </div>
         </div>
       </div>
+    </div>
   );
 }
 

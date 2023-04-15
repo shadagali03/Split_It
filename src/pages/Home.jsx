@@ -13,8 +13,8 @@ const Home = () => {
             <div className="text-center">
               <h1 className="text-5xl font-bold text-amber-700">SplitIt</h1>
               <h2 className="text-lg font-medium text-black">Simplify your group expenses!</h2>
-              <Oauth />
             </div>
+          <Oauth />
           </div>
           </div>
         </div>

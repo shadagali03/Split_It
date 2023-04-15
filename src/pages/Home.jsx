@@ -1,4 +1,5 @@
 import React from 'react';
+import Oauth from '../components/Oauth'
 
 const Home = () => {
   return (
@@ -12,14 +13,12 @@ const Home = () => {
             <div className="text-center">
               <h1 className="text-5xl font-bold text-amber-700">SplitIt</h1>
               <h2 className="text-lg font-medium text-black">Simplify your group expenses!</h2>
+              <Oauth />
             </div>
           </div>
-          <div className="p-4 ml-auto flex items-center">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign In</button>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

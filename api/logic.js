@@ -6,6 +6,7 @@ class Item {
         this.numBuying = people.length;
     }
 }
+// Testing
 
 class Person {
     constructor(name, initial, count=1) {

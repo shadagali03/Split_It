@@ -1,9 +1,11 @@
 import React from 'react';
 import Oauth from '../components/Oauth'
+import SidebarFunc from '../components/SidebarFunc';
 
 const Home = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-pink-200">
+      <SidebarFunc />
       <div className="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
         <div className="md:flex-row md:flex">
           <div className="p-4">

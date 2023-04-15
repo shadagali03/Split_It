@@ -1,4 +1,5 @@
 import React from 'react';
+import Oauth from '../components/Oauth'
 
 
 const Home = () => {
@@ -14,7 +15,8 @@ const Home = () => {
             <h2 className="text-lg font-medium text-gray-600">Subtitle</h2>
           </div>
           <div className="p-4 ml-auto">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign In</button>
+            <Oauth />
+            {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Sign In</button> */}
           </div>
         </div>
       </div>

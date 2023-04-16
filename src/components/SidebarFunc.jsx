@@ -24,7 +24,7 @@ function SidebarFunc() {
             <div className="p-4 flex flex-col justify-center">
               <div className="text-left">
                 <Link to="/">
-                  <h1 className="text-4xl font-bold text-amber-800">SplitIt</h1>
+                  <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-700 to-pink-400 text-transparent bg-clip-text stroke-black stroke-1">SplitIt</h1>
                 </Link>
               </div>
             </div>

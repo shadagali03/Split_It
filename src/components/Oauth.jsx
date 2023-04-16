@@ -20,7 +20,9 @@ export default function Oauth() {
                     uid: user.uid,
                     name: user.displayName,
                     email: user.email,
+                })
             }
+
             setUser(auth.currentUser)
         } catch (err) {
             console.error(err);

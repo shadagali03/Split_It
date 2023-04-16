@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import SidebarFunc from '../components/SidebarFunc';
+import React, { useState, useRef } from 'react';
+import { SidebarFunc } from '../components';
 import {parseFile, calculate, Group, Person, Item} from '../api/logic';
 import AddItem from '../components/AddItem';
 

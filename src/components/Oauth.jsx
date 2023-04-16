@@ -1,41 +1,43 @@
-import React, { useEffect } from 'react'
-import { GoogleLogin, googleLogout, GoogleOAuthProvider } from '@react-oauth/google';
-import useStore from '../store'
-import Cookies from 'universal-cookie'
-const cookies = new Cookies()
-
+import { auth, db } from '../firebase'
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { query, getDocs, collection, where, addDoc } from "firebase/firestore";
+import { useState } from 'react';
 
 export default function Oauth() {
-    const user = useStore(state => state.user)
-    const setUser = useStore(state => state.setUser)
-    console.log(user)
+    const googleProvider = new GoogleAuthProvider();
+    const [user, setUser] = useState(null)
 
-    useEffect(() => {
-        const googleUser = cookies.get('googleUser')
-        if (googleUser) (async () => setUser(googleUser))()
-    }, [setUser])
-
-    return <GoogleOAuthProvider clientId="1028579500769-fg8adfhna2c5hb7ee0012afb5t6kunqi.apps.googleusercontent.com">
-        {user ?
-            <button className="bg-gradient-to-r from-main-400 via-main-500 to-main-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-main-300 dark:focus:ring-main-800 shadow-lg shadow-main-500/50 dark:shadow-lg dark:shadow-main-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                onClick={async () => {
-                    googleLogout()
-                    cookies.set('googleUser', null)
-                    setUser(null)
-                }}
-                type="button">
-                Logout
-            </button> :
-            <GoogleLogin
-                onSuccess={async (googleUser) => {
-                    cookies.set('googleUser', googleUser)
-                    setUser(googleUser)
-                }}
-                onError={(error) => console.log(error)}
-                auto_select
-                // useOneTap
-            />
-
+    const signInWithGoogle = async () => {
+        try {
+            const res = await signInWithPopup(auth, googleProvider);
+            const user = res.user;
+            const q = query(collection(db, "users"), where("uid", "==", user.uid));
+            const docs = await getDocs(q);
+            if (docs.docs.length === 0) {
+                await addDoc(collection(db, "users"), {
+                    uid: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                });
+            }
+            setUser(auth.currentUser)
+        } catch (err) {
+            console.error(err);
+            alert(err.message);
         }
-    </GoogleOAuthProvider>
+    }
+
+    const signOut = async () => {
+        await auth.signOut()
+        setUser(auth.currentUser)
+    }
+
+    return (<div>
+        {user ?
+            <button className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded absolute top-5 right-5' onClick={signOut}>Sign out</button>
+            : <button onClick={signInWithGoogle} >
+                <img src="https://www.drupal.org/files/issues/2020-01-19/google_logo.png" alt="Sign in with Google" width="200" height="50" />
+            </button>}
+    </div>
+    )
 }

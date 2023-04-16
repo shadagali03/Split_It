@@ -2,7 +2,6 @@ import React from 'react';
 import SidebarFunc from '../components/SidebarFunc';
 import BarChart from '../components/BarChart';
 import ActivityFeed from '../components/ActivityFeed';
-import Oauth from '../components/Oauth'
 
 const Dashboard = () => {
   return (

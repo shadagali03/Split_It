@@ -1,11 +1,10 @@
 import React from 'react';
-import SidebarFunc from '../components/SidebarFunc';
-import BarChart from '../components/BarChart';
-import ActivityFeed from '../components/ActivityFeed';
+import { ActivityFeed, BarChart, Oauth, SidebarFunc} from '../components';
 
 const Dashboard = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
+      
       <SidebarFunc />
       <div className="flex flex-col w-full h-full bg-pink-200">
         <div className="flex flex-row h-full">
@@ -20,7 +19,7 @@ const Dashboard = () => {
           <div className="w-1/2 flex h-screen">
             <ActivityFeed />
           </div>
-          {/* <Oauth /> */}
+          <Oauth />
         </div>
       </div>
     </div>

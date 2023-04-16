@@ -1,6 +1,6 @@
 import { auth, db } from '../firebase'
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { query, getDocs, collection, where } from "firebase/firestore";
+import { query, getDocs, collection, where, setDoc, doc } from "firebase/firestore";
 import { useState } from 'react';
 
 
@@ -16,11 +16,10 @@ export default function Oauth() {
             const q = query(collection(db, "users"), where("uid", "==", user.uid));
             const docs = await getDocs(q);
             if (docs.docs.length === 0) {
-                await db.collection("users").doc(user.uid).set({
+                await setDoc(doc(db, "users", user.uid), {
                     uid: user.uid,
                     name: user.displayName,
                     email: user.email,
-                })
             }
             setUser(auth.currentUser)
         } catch (err) {

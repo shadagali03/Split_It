@@ -1,6 +1,5 @@
 import React from 'react';
-import Oauth from '../components/Oauth'
-import SidebarFunc from '../components/SidebarFunc';
+import { Oauth, SidebarFunc } from '../components';
 
 const Home = () => {
   return (
@@ -13,7 +12,7 @@ const Home = () => {
           </div>
           <div className="p-4 flex flex-col justify-center">
             <div className="text-left">
-              <h1 className="text-5xl font-bold text-amber-700">SplitIt</h1>
+              <h1 className="text-5xl font-bold text-amber-800">SplitIt</h1>
               <h2 className="text-lg font-medium text-black">Simplify your group expenses!</h2>
             </div>
             <Oauth />

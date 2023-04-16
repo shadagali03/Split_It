@@ -50,7 +50,7 @@ export class Group {
     constructor(group) {
         this.group = group;
         this.groupTotal = group.length;
-        this.group.push(new Person('Everyone', 'E', this.groupTotal));
+        // this.group.push(new Person('Everyone', 'E', this.groupTotal));
     }
 
     addPerson(person) {
@@ -65,13 +65,6 @@ export class Group {
         }
     }
 
-    addEveryoneTotal() {
-        for (let person of this.group) {
-            if (person.initial !== 'E') {
-                person.addToTotal(this.getPerson('E').totalSpent);
-            }
-        }
-    }
 
     calcPrices(breakdown) {
         for (let item of breakdown) {
@@ -79,20 +72,17 @@ export class Group {
                 this.getPerson(initial).addItem(item);
             }
         }
-        this.addEveryoneTotal();
     }
 }
 
-export function parseFile(file='groceriesList.txt') {
+export function parseFile(data=[]) {
     const breakdown = [];
-    // const fs = require('fs');
-    // const data = fs.readFileSync(file, 'utf8');
-    const data = file;
-    const lines = data.split(/\r?\n/);
-    for (let line of lines) {
-        console.log(line)
-        const brokenItem = line.split(' ');
-        breakdown.push(new Item(brokenItem[0], parseFloat(brokenItem[1]), brokenItem[2]));
+    for (let line of data) {
+        if (line.length !== 0) {
+            console.log("here1")
+            breakdown.push(new Item(line[0], parseFloat(line[1]), line[2]));
+        }
+        
     }
     return breakdown;
 }
@@ -112,25 +102,25 @@ export function createGroup() {
 
 }
 
-if (require.main === module) {
-    const group = new Group([
-        new Person('Sarang', 'S'),
-        new Person('Arnov', 'A'),
-        new Person('Dev', 'D'),
-        new Person('Sagar', 'P'),
-        new Person('Sahil', 'G')
-    ]);
+// if (require.main === module) {
+//     const group = new Group([
+//         new Person('Sarang', 'S'),
+//         new Person('Arnov', 'A'),
+//         new Person('Dev', 'D'),
+//         new Person('Sagar', 'P'),
+//         new Person('Sahil', 'G')
+//     ]);
 
-    const breakdown = parseFile();
-    group.calcPrices(breakdown);
+//     const breakdown = parseFile();
+//     group.calcPrices(breakdown);
 
-    console.log("\nGroup Breakdown");
-    console.log("======================================\n");
+//     console.log("\nGroup Breakdown");
+//     console.log("======================================\n");
 
-    let total = 0;
-    for (let person of group.group) {
-        person.generateTotal();
-        total += person.totalSpent;
-    }
-    console.log("Total Bill: " + total.toFixed(2));
-}
+//     let total = 0;
+//     for (let person of group.group) {
+//         person.generateTotal();
+//         total += person.totalSpent;
+//     }
+//     console.log("Total Bill: " + total.toFixed(2));
+// }

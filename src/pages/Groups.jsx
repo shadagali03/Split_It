@@ -1,6 +1,5 @@
 import React from 'react';
-import SidebarFunc from '../components/SidebarFunc';
-import GroupComp from '../components/GroupComp';
+import { GroupComp, SidebarFunc } from '../components';
 import { useState, useEffect } from 'react';
 import { db, auth } from '../firebase'
 import { query, getDocs, collection, where, addDoc } from "firebase/firestore";

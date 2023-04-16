@@ -5,6 +5,9 @@ module.exports = {
     'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
   ],
   theme: {
+    fontFamily: {
+      'mono': ['ui-monospace']
+    },
     extend: {},
   },
   plugins: [

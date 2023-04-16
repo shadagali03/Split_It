@@ -1,4 +1,4 @@
-class Item {
+export class Item {
     constructor(name, cost, people) {
         this.name = name;
         this.cost = cost;
@@ -8,7 +8,7 @@ class Item {
 }
 // Testing
 
-class Person {
+export class Person {
     constructor(name, initial, count=1) {
         this.name = name;
         this.initial = initial;
@@ -27,17 +27,18 @@ class Person {
     }
 
     generateTotal() {
-        console.log(this.name + '\n------------------------------');
-        const labels = ["Item", "Cost"];
-        process.stdout.write(`${labels[0]} `.padEnd(15));
-        console.log(`${labels[1]} `.padStart(10));
-        console.log('------------------------------');
-        for (let item of this.itemsPurchased) {
-            process.stdout.write(`${item[0]} `.padEnd(15));
-            console.log(`${item[1]} `.padStart(10));
-        }
-        console.log();
-        console.log(this.name + "'s Total: " + this.totalSpent.toFixed(2) + "\n");
+        // console.log(this.name + '\n------------------------------');
+        // const labels = ["Item", "Cost"];
+        // process.stdout.write(`${labels[0]} `.padEnd(15));
+        // console.log(`${labels[1]} `.padStart(10));
+        // console.log('------------------------------');
+        // for (let item of this.itemsPurchased) {
+        //     process.stdout.write(`${item[0]} `.padEnd(15));
+        //     console.log(`${item[1]} `.padStart(10));
+        // }
+        // console.log();
+        // console.log(this.name + "'s Total: " + this.totalSpent.toFixed(2) + "\n");
+        return {"itemsPurchases" : this.itemsPurchased, "totalSpent" : this.totalSpent}
     }
 
     addToTotal(amt) {
@@ -45,7 +46,7 @@ class Person {
     }
 }
 
-class Group {
+export class Group {
     constructor(group) {
         this.group = group;
         this.groupTotal = group.length;
@@ -82,16 +83,33 @@ class Group {
     }
 }
 
-function parseFile(file='groceriesList.txt') {
+export function parseFile(file='groceriesList.txt') {
     const breakdown = [];
-    const fs = require('fs');
-    const data = fs.readFileSync(file, 'utf8');
+    // const fs = require('fs');
+    // const data = fs.readFileSync(file, 'utf8');
+    const data = file;
     const lines = data.split(/\r?\n/);
     for (let line of lines) {
+        console.log(line)
         const brokenItem = line.split(' ');
         breakdown.push(new Item(brokenItem[0], parseFloat(brokenItem[1]), brokenItem[2]));
     }
     return breakdown;
+}
+
+export function calculate(your_group, breakdown) {
+    your_group.calcPrices(breakdown);
+    let everything = []
+    var total = 0
+    for (let person of your_group.group) {
+        everything.push(person.generateTotal())
+        total += person.totalSpent;
+    }
+    return {"groupBreakdown" : everything, "groupTotal" : total};
+}
+
+export function createGroup() {
+
 }
 
 if (require.main === module) {

@@ -3,9 +3,11 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { query, getDocs, collection, where, setDoc, doc } from "firebase/firestore";
 import { useState } from 'react';
 
+
 export default function Oauth() {
     const googleProvider = new GoogleAuthProvider();
     const [user, setUser] = useState(auth.currentUser)
+    auth.onAuthStateChanged(user => setUser(user))
 
     const signInWithGoogle = async () => {
         try {
@@ -18,12 +20,6 @@ export default function Oauth() {
                     uid: user.uid,
                     name: user.displayName,
                     email: user.email,
-                });
-                // await addDoc(collection(db, "users"), {
-                //     uid: user.uid,
-                //     name: user.displayName,
-                //     email: user.email,
-                // });
             }
             setUser(auth.currentUser)
         } catch (err) {

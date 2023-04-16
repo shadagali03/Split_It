@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SidebarFunc } from '../components';
-import {parseFile, calculate, Group, Person, Item} from '../api/logic';
+import {parseFile, calculate, Group, Person } from '../api/logic';
 import AddItem from '../components/AddItem';
 
 const Addexpense = () => {
@@ -41,10 +41,10 @@ const Addexpense = () => {
         { name: 'Sagar', code: 'PRS' , item: "here"},
     ];
   return (
-    <div className="flex h-screen bg-pink-200">
+    <div className="flex h-screen bg-pink-200 overflow-auto">
       <SidebarFunc />
-      <div className="max-w-md mx-auto rounded-lg md:max-w-xl pt-16">
-          <h1 className='pb-8'>Group Name</h1>
+      <div className="max-w-md mx-auto rounded-lg md:max-w-xl pt-8">
+          <h1 className='pb-4'>Group Name</h1>
           {[...Array(newData[1])].map((e, i) => (
             <>
               <AddItem group={my_group} passChildData={setNewData} numItems={newData[1]}/>
@@ -53,13 +53,35 @@ const Addexpense = () => {
           ))}
           <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Submit</button>
       {hasSubmit ?
-         <div>
+         <div className='bg-gray-200 text-black font-bold py-2 px-4 mt-4 rounded resize-none overflow-auto h-64 mb-8'>
           {finalBreakdown.groupBreakdown.map((e,i) => (
-              <div className='flex items-center flex-row gap-4'>
-                {my_group[i].name}
-                {my_group[i].name}
+              <div className=''>
+                {i===0 ? <div className='flex justify-center flex-row gap-8'>
+                          <p>User</p>
+                          <p>Total Spent ($)</p>
+                        </div> : (null)}
+                <div className='flex justify-center flex-row gap-16'>
+                  <div>
+                    {my_group[i].name}
+                  </div>
+                  <div>
+                    {e.totalSpent}
+                  </div>
+                </div>
+                {e.itemsPurchases.map((e1,j) => (
+                  <div className='flex justify-center flex-row gap-4'>
+                    <div>
+                      {e1[0]}
+                    </div>
+                    <div>
+                      {e1[1].toFixed(2)}
+                    </div>
+                  </div>
+                ))}
               </div>
           ))}
+          Total =
+          {finalBreakdown.groupTotal.toFixed(2)}
         </div> 
         : (null)}
     </div>

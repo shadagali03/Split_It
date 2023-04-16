@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { MultiSelect } from 'primereact/multiselect';
+import { InputText } from 'primereact/inputtext';
 import { useFormik } from 'formik';
 import { Toast } from 'primereact/toast';
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
@@ -13,6 +14,9 @@ import "primeicons/primeicons.css";
 */
 function AddItem(props) {
     const toast = useRef(null);
+    const [item, setItem] = useState('');
+    const [price, setPrice] = useState('');
+
 
     //  const cities = [
     //     { name: 'New York', code: 'NY' },
@@ -42,10 +46,12 @@ function AddItem(props) {
             return errors;
         },
         onSubmit: (data) => {
-            console.log(data);
+            let itemBuyers = []
+            for (const user of data.item) {
+                itemBuyers.push(user.name)
+            }
+            props.passChildData([[item, price, itemBuyers], props.numItems+1])
             data && show();
-
-            formik.resetForm();
         }
     });
 
@@ -56,27 +62,36 @@ function AddItem(props) {
     };
 
     return (
-        <div className="card flex justify-content-center">
-            <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-2">
-                <Toast ref={toast} />
-                <MultiSelect
-                    id="item"
-                    name="item"
-                    options={props.group}
-                    value={formik.values.item}
-                    onChange={(e) => {
-                        formik.setFieldValue('item', e.value);
-                    }}
-                    optionLabel="name"
-                    placeholder="Select people"
-                    maxSelectedLabels={3}
-                    className="w-full md:w-20rem"
-                />
-                {getFormErrorMessage('item')}
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-               +
-             </button>
-            </form>
+        <div className='bg-pink-100 p-2 rounded w-fit m-auto'>
+            <div class="flex flex-row gap-4">
+                <div>
+                    <InputText value={item} onChange={(e) => setItem(e.target.value)} placeholder="Item name" />
+                </div>
+                <div>
+                    <InputText value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Item price" />
+                </div>
+                <div className="card flex justify-content-center">
+                    <form onSubmit={formik.handleSubmit} className="flex flex-column align-items-center gap-1">
+                        <Toast ref={toast} />
+                        <MultiSelect
+                            id="item"
+                            name="item"
+                            options={props.group}
+                            value={formik.values.item}
+                            onChange={(e) => {
+                                formik.setFieldValue('item', e.value);
+                            }}
+                            optionLabel="name"
+                            placeholder="Select people"
+                            maxSelectedLabels={3}
+                            className="flex w-48 md:w-20rem"
+                        />
+                        {getFormErrorMessage('item')}
+                        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
     )
 }

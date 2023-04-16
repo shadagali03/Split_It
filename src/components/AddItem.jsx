@@ -40,7 +40,7 @@ function AddItem(props) {
             let errors = {};
 
             if (!data.item) {
-                errors.item = 'City is required.';
+                errors.item = 'Atleast one person is required.';
             }
 
             return errors;
@@ -63,7 +63,7 @@ function AddItem(props) {
 
     return (
         <div className='bg-pink-100 p-2 rounded w-fit m-auto'>
-            <div class="flex flex-row gap-4">
+            <div className="flex flex-row gap-4">
                 <div>
                     <InputText value={item} onChange={(e) => setItem(e.target.value)} placeholder="Item name" />
                 </div>
@@ -76,7 +76,7 @@ function AddItem(props) {
                         <MultiSelect
                             id="item"
                             name="item"
-                            options={props.group}
+                            options={props.group.map(e => ({'name': e, 'code': e}))}
                             value={formik.values.item}
                             onChange={(e) => {
                                 formik.setFieldValue('item', e.value);

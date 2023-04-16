@@ -11,7 +11,7 @@ import { useState } from 'react';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(auth.currentUser != null && auth.currentUser !== undefined)
   auth.onAuthStateChanged(user => setIsLoggedIn(user != null && user !== undefined))
-  console.log(auth.currentUser, isLoggedIn)
+
   return (
     <div className="App font-inter">
           <BrowserRouter>

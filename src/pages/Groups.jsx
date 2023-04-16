@@ -5,9 +5,6 @@ import { db } from '../firebase'
 import { query, getDocs, collection, where, addDoc} from "firebase/firestore";
 
 
-
-
-
 const Groups = () => {
   const [createGroup, setCreateGroup] = useState(false)
   const [addEmailNum, setAddEmailNum] = useState(0)
@@ -17,6 +14,7 @@ const Groups = () => {
     const q = query(collection(db, "users"), where("email", "in", emails));
     const docs = (await getDocs(q)).docs;
     const uids = docs.map(e => e._document.data.value.mapValue.fields.uid.stringValue)
+
     await addDoc(collection(db, "groups"), {
       name: document.getElementById('groupNameInput').value,
       users: uids,
@@ -28,6 +26,7 @@ const Groups = () => {
     <div className="flex items-center justify-center h-screen bg-pink-200">
       <SidebarFunc />
       <div className="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
+
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setCreateGroup(true)}>
           Create Group
         </button>
@@ -59,6 +58,8 @@ const Groups = () => {
             </button>
             : (null)
         }
+
+
       </div>
     </div>
   );

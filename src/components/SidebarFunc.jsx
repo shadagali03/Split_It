@@ -3,7 +3,6 @@ import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 
 
-
 function SidebarFunc() {
   return (
     <div style={{ display: 'flex', height: '100%' }}>

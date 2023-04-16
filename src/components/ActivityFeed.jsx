@@ -22,7 +22,7 @@ const ActivityFeed = () => {
   return (
     <div className="bg-pink-300 shadow-lg rounded-lg m-auto w-full h-5/6 overflow-y-auto">
       {activityData.map((activity, index) => (
-        <div key={index} className="flex justify-between items-center py-2 px-4">
+        <div key={index} className="flex justify-between items-center py-6 px-4">
           <div>
             <p>{activity.name}</p>
             <p className="text-sm text-gray-500">{activity.date}</p>

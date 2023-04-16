@@ -9,9 +9,10 @@ export class Item {
 // Testing
 
 export class Person {
-    constructor(name, initial, count=1) {
+    constructor(name, initial, uid, count=1) {
         this.name = name;
         this.initial = initial;
+        this.uid = uid;
         this.totalSpent = 0;
         this.itemsPurchased = [];
         this.count = count;
@@ -58,17 +59,23 @@ export class Group {
     }
 
     getPerson(initial) {
+        console.log(initial)
         for (let person of this.group) {
             if (person.initial === initial) {
                 return person;
             }
         }
+        console.log("wrong")
+        return new Person("error", "error", 'f43434ffgffsda435')
     }
 
 
     calcPrices(breakdown) {
         for (let item of breakdown) {
             for (let initial of item.people) {
+                console.log(initial)
+                console.log(this.getPerson(initial))
+                console.log(item)
                 this.getPerson(initial).addItem(item);
             }
         }
@@ -79,7 +86,7 @@ export function parseFile(data=[]) {
     const breakdown = [];
     for (let line of data) {
         if (line.length !== 0) {
-            console.log("here1")
+            console.log("here1", line)
             breakdown.push(new Item(line[0], parseFloat(line[1]), line[2]));
         }
         
@@ -89,10 +96,11 @@ export function parseFile(data=[]) {
 
 export function calculate(your_group, breakdown) {
     your_group.calcPrices(breakdown);
-    let everything = []
+    let everything = {}
     var total = 0
     for (let person of your_group.group) {
-        everything.push(person.generateTotal())
+        everything[person.uid] = person.generateTotal()
+        // everything.push(person.generateTotal())
         total += person.totalSpent;
     }
     return {"groupBreakdown" : everything, "groupTotal" : total};

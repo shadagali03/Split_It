@@ -51,7 +51,7 @@ const Addexpense = () => {
               <br />
             </>
           ))}
-          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Submit</button>
+          <button type="submit" className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Submit</button>
       {hasSubmit ?
          <div>
           {finalBreakdown.groupBreakdown.map((e,i) => (

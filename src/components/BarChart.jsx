@@ -16,6 +16,9 @@ const BarChart = () => {
         showBackground: true,
         backgroundStyle: {
           color: 'rgba(180, 180, 180, 0.2)'
+        },
+        itemStyle: {
+          color: '#6434eb'
         }
       }
     ]

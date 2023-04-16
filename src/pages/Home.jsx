@@ -12,8 +12,8 @@ const Home = () => {
           </div>
           <div className="p-4 flex flex-col justify-center">
             <div className="text-left">
-              <h1 className="text-5xl font-bold text-amber-800">SplitIt</h1>
-              <h2 className="text-lg font-medium text-black">Simplify your group expenses!</h2>
+              <h1 className="text-7xl font-bold bg-gradient-to-r from-pink-700 to-pink-300 text-transparent bg-clip-text stroke-black stroke-1">SplitIt</h1>
+              <h2 className="text-4xl font-medium text-black">Simplify your group expenses!</h2>
             </div>
             <Oauth />
           </div>

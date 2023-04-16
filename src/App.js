@@ -13,7 +13,7 @@ function App() {
   auth.onAuthStateChanged(user => setIsLoggedIn(user != null && user !== undefined))
   console.log(auth.currentUser, isLoggedIn)
   return (
-    <div className="App font-mono">
+    <div className="App font-inter">
           <BrowserRouter>
             <Routes>
               <Route path ="/" element={<Home />} />

@@ -3,4 +3,5 @@ export { default as AddItem } from './AddItem';
 export { default as BarChart } from './BarChart';
 export { default as GroupComp } from './GroupComp';
 export { default as Oauth } from './Oauth';
+export { default as PieChart } from './PieChart';
 export { default as SidebarFunc } from './SidebarFunc';

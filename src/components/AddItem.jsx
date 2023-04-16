@@ -13,6 +13,7 @@ import "primeicons/primeicons.css";
     ]
 */
 function AddItem(props) {
+    console.log(props.group)
     const toast = useRef(null);
     const [item, setItem] = useState('');
     const [price, setPrice] = useState('');

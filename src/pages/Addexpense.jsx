@@ -18,7 +18,7 @@ const Addexpense = (props) => {
   const [groupNames, setGroupNames] = useState([])
   let [myGroup, setMyGroup] = useState({})
   const [temp, setTemp] = useState(null)
-  const [users, setUsers] = useState([])
+  let [users, setUsers] = useState([])
   let [myGroupUserNames, setMyGroupUserNames] = useState([])
 
   function handleSubmit() {
@@ -62,15 +62,18 @@ const Addexpense = (props) => {
     const docs = (await getDocs(q)).docs
     setMyGroup(docs['0']._document.data.value.mapValue.fields)
     myGroup = docs['0']._document.data.value.mapValue.fields
-    console.log(myGroup)
+    // console.log(myGroup)
     const myGroupUids = myGroup.users.arrayValue.values.map(e => e.stringValue)
     console.log(myGroupUids)
-    console.log(collection(db, "users"))
-    console.log(collection(db, "groups"))
+    // console.log(collection(db, "users"))
+    // console.log(collection(db, "groups"))
     const q1 = query(collection(db, "users"), where("uid", "in", myGroupUids));
     const docs1 = (await getDocs(q1)).docs;
     setUsers(docs1.map(e => e._document.data.value.mapValue.fields))
+    users = docs1.map(e => e._document.data.value.mapValue.fields)
+    console.log(docs1.map(e => e._document.data.value.mapValue.fields), users)
     setMyGroupUserNames(users.map(e => e.name.stringValue))
+    console.log(myGroupUserNames, users.map(e => e.name.stringValue))
   };
 
   return (
@@ -95,9 +98,10 @@ const Addexpense = (props) => {
         <button type="submit" className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>Submit</button>
         {hasSubmit ?
           <div>
-            {Object.keys(finalBreakdown.groupBreakdown).map((e, i) => (
+            {Object.entries(finalBreakdown.groupBreakdown).map((e, i) => (
               <div className='flex items-center flex-row gap-4'>
-
+                {/* {e[0]}
+                {Object.entries(e[1]).toString()} */}
               </div>
             ))}
           </div>

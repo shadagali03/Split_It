@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function SidebarFunc() {
   return (
-    <div class="flex h-full font-semibold">
+    <div className="flex h-full font-semibold">
       <Sidebar>
         <Menu>
           <MenuItem component={<Link to="/" />}> Home </MenuItem>
